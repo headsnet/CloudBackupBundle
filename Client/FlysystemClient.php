@@ -24,7 +24,7 @@ class FlysystemClient implements ClientInterface
 
         /** @var FilesystemInterface $filesystem */
         foreach ($this->filesystems as $filesystem) {
-            $filesystem->write(end($fileName), file_get_contents($archive));
+            $filesystem->write(date('Y-m') . '/' . end($fileName), file_get_contents($archive));
         }
     }
 
