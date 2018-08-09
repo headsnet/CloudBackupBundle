@@ -115,7 +115,7 @@ class Configuration implements ConfigurationInterface
                             ->booleanNode('all_databases')->defaultFalse()->end()
                             ->scalarNode('database')->defaultNull()->end()
                             ->scalarNode('db_host')->defaultNull()->end()
-                            //->scalarNode('db_host')->defaultValue('localhost')->end()
+                            ->scalarNode('db_host')->defaultValue('localhost')->end()
                             ->scalarNode('db_port')->defaultValue(3306)->end()
                             ->scalarNode('db_user')->defaultNull()->end()
                             ->scalarNode('db_password')->defaultNull()->end()
