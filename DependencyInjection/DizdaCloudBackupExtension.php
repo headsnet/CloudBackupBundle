@@ -79,7 +79,6 @@ class DizdaCloudBackupExtension extends Extension
             $container->setParameter('dizda_cloud_backup.cloud_storages', array());
         }
 
-        $this->setDatabases($config, $container);
         $this->setProcessor($config, $container);
         $this->setSplitter($config, $container);
     }
@@ -118,60 +117,4 @@ class DizdaCloudBackupExtension extends Extension
         $processorManager->addMethodCall('setSplitter', [ new Reference($serviceId) ]);
    }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     */
-    private function setDatabases($config, ContainerBuilder $container)
-    {
-        $databases = $container->getParameter('dizda_cloud_backup.databases');
-
-        // Setting mysql values
-        if (isset($config['databases']['mysql'])) {
-            $mysql     = $databases['mysql'];
-
-            if ($mysql['database'] === null) {
-                $mysql['database'] = $container->getParameter('database_name');
-            }
-
-            /* if mysql config is not set, we taking from the parameters.yml values */
-            if ($mysql['db_host'] === null && $mysql['db_user'] === null) {
-                $mysql['db_host'] = $container->getParameter('database_host');
-
-                if ($container->getParameter('database_port') !== null) {
-                    $mysql['db_port'] = $container->getParameter('database_port');
-                }
-
-                $mysql['db_user']     = $container->getParameter('database_user');
-                $mysql['db_password'] = $container->getParameter('database_password');
-            }
-
-            $databases['mysql'] = $mysql;
-        }
-
-        // Setting postgresql values
-        if (isset($config['databases']['postgresql'])) {
-            $postgresql = $databases['postgresql'];
-
-            if ($postgresql['database'] === null) {
-                $postgresql['database'] = $container->getParameter('database_name');
-            }
-
-            /* if postgresql config is not set, we taking from the parameters.yml values */
-            if ($postgresql['db_host'] === null && $postgresql['db_user'] === null) {
-                $postgresql['db_host'] = $container->getParameter('database_host');
-
-                if ($container->getParameter('database_port') !== null) {
-                    $postgresql['db_port'] = $container->getParameter('database_port');
-                }
-
-                $postgresql['db_user']     = $container->getParameter('database_user');
-                $postgresql['db_password'] = $container->getParameter('database_password');
-            }
-
-            $databases['postgresql'] = $postgresql;
-        }
-
-        $container->setParameter('dizda_cloud_backup.databases', $databases);
-    }
 }

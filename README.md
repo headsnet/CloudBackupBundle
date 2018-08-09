@@ -127,19 +127,19 @@ dizda_cloud_backup:
 
         mysql:
             all_databases: false # Only required when no database is set
-            database: ~          # Required if all_databases is false
-            db_host: localhost   # This, and following is not required and if not specified, the bundle will take ORM configuration in parameters.yml
-            db_port: ~           # Default 3306
-            db_user: ~
-            db_password: ~
+            database:      ~     # Required if all_databases is false
+            db_host:       localhost
+            db_port:       3306 
+            db_user:       ~
+            db_password:   ~
             ignore_tables:       # Specify full name if dumping all databases. `dbname.tablename`
                 - table1
                 - table2
 
         postgresql:
             database: dbname     # Required
-            db_host: localhost   # This, and following is not required and if not specified, the bundle will take ORM configuration in parameters.yml
-            db_port: ~           # Default 5432
+            db_host: localhost
+            db_port: 5432
             db_user: ~
             db_password: ~
 ```
